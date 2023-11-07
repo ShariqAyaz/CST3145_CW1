@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <!-- Started VUE Application here -->
     <div id="VueApp">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -48,9 +49,6 @@
                 </div>
             </div>
         </nav>
-
-        <!-- Started VUE Application here -->
-
 
         <!-- Toggle True: Catalogue View -->
         <div v-if="toggle">
@@ -93,26 +91,25 @@
         <!-- Toggle True: Cart View -->
         <div v-else>
             <div class="container text-center">
-                <div class="row row-cols-3">
-                    <div v-for="(l,inx) in cart">
+                <div class="row row-cols-6">
+                    <div v-for="(l,idx) in cart">
                         <div class="col" style="margin:0px;padding:0px">
-                            <div class="card" style="width: 18rem;padding-top:15px;margin-top:15px;">
+                            <div class="card" style="width: 10rem;padding-top:8px;margin-top:8px;">
                                 <div
                                     style="margin-top:0px;padding-top:0px;background-color: rgb(244, 244, 244);color:rgb(0, 0, 0)">
                                     <strong>{{l.location}}</strong>
-                                </div>{{inx}}
+                                </div>
                                 <div class="display-6">{{l.name}}</div>
                                 <img v-bind:src="l.img" class="rounded mx-auto d-block" v-bind:alt='l.img'
-                                    style="height: 80px;width: 80px;">
+                                    style="height: 70px;width: 70px;">
                                 <div class="card-body">
                                     <div style="border: 1px dotted;">QTY <strong>1</strong></div>
                                     <br>
                                     <p>
-                                        <mark class="display-6">{{l.cur}} {{l.price}}</mark>
+                                        <mark>{{l.cur}} {{l.price}}</mark>
                                     </p>
-                                        <button type="button" class="btn btn-danger btn-sm"
-                                            v-on:click="cart.push(l);l.slots++">Remove</button>
-                                    
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        v-on:click="cart.splice(idx,1);l.slots++">Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -122,6 +119,18 @@
             </div>
         </div>
     </div>
+    <!-- ENDED VUE Application here -->
+
+    <!-- footer note -->
+    <br>
+    <hr>
+    <footer>
+        <p style="text-align: center; font-style: italic; font-size: 14px;">
+            This site and content on this site is for non-commercial purpose and temporary. Any content which is
+            unauthorized could be reported to gr8shariq@gmail.com for removal.
+        </p>
+    </footer>
+
 </body>
 
 <script>
@@ -150,7 +159,13 @@
                 }
             ],
             search_string: "",
-        }
+        },
+        methods: {
+
+        },
+        computed: {
+
+        },
     });
 </script>
 
