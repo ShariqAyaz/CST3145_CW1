@@ -1,4 +1,4 @@
-let lesson = [
+let lessons = [
   {
     id: 0,
     name: 'Basketball',
