@@ -58,6 +58,7 @@
                 <div class="display-6">Catalogue</div>
                 <hr>
                 <div class="row row-cols-3">
+                    <!-- Catalogue View -->
                     <div v-for="l in subjects">
                         <div class="col" style="margin:0px;padding:0px">
                             <div class="card" style="width: 18rem;padding-top:15px;margin-top:15px;">
@@ -76,7 +77,8 @@
                                         <br> was:<del>{{l.cur}} {{l.price+8}}</del>
                                     </p>
                                     <div v-if="l.slots > 0">
-                                        <button type="button" class="btn btn-success btn-sm" v-on:click="cart.push(l);l.slots--">ADD</button>
+                                        <button type="button" class="btn btn-success btn-sm"
+                                            v-on:click="cart.push(l);l.slots--">ADD</button>
                                     </div>
                                     <div v-else>
                                         <button type="button" class="btn btn-success disabled btn-sm">ADD</button>
@@ -88,10 +90,36 @@
                 </div>
             </div>
         </div>
-
         <!-- Toggle True: Cart View -->
         <div v-else>
-            {{cart}}
+            <div class="container text-center">
+                <div class="row row-cols-3">
+                    <div v-for="(l,inx) in cart">
+                        <div class="col" style="margin:0px;padding:0px">
+                            <div class="card" style="width: 18rem;padding-top:15px;margin-top:15px;">
+                                <div
+                                    style="margin-top:0px;padding-top:0px;background-color: rgb(244, 244, 244);color:rgb(0, 0, 0)">
+                                    <strong>{{l.location}}</strong>
+                                </div>{{inx}}
+                                <div class="display-6">{{l.name}}</div>
+                                <img v-bind:src="l.img" class="rounded mx-auto d-block" v-bind:alt='l.img'
+                                    style="height: 80px;width: 80px;">
+                                <div class="card-body">
+                                    <div style="border: 1px dotted;">QTY <strong>1</strong></div>
+                                    <br>
+                                    <p>
+                                        <mark class="display-6">{{l.cur}} {{l.price}}</mark>
+                                    </p>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            v-on:click="cart.push(l);l.slots++">Remove</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -101,11 +129,14 @@
         el: "#VueApp",
         data: {
             subjects: lessonsObj,
+            // cart[]: volatile , holding only cart item unless refresh or progress to proceed purchased
             cart: [],
+            // toggle: toggle between cart and catalogue
             toggle: true,
             sort: 1, // Assending order 1, deassending order 2
             name: "",
             phone: "",
+            // order[]: Order Number carrying ordered only, data moved from cart
             order: [
                 {
                     order_no: "",
