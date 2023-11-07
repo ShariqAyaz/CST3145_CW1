@@ -4,7 +4,7 @@ let lessonsObj = [
     name: 'Basketball',
     img: 'img/Basketball.jpg',
     price: 106,
-    slots: 23,
+    slots: 0,
     location: 'London',
     cur: '£'
   },

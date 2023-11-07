@@ -15,34 +15,42 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <h1 class="display-6">After School Activites</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Catalogue</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Cart</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Started VUE Application here -->
     <div id="VueApp">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <h1 class="display-6">After School Activites</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Catalogue</a>
+                        </li>
+                        <div v-if="cart.length > 0">
+                            <li class="nav-item">
+                                <a class="nav-link" v-on:click="toggle = !toggle" href="#">Cart</a>
+                            </li>
+                        </div>
+                        <div v-else>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">Cart</a>
+                            </li>
+                        </div>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Started VUE Application here -->
+
 
         <!-- Toggle True: Catalogue View -->
         <div v-if="toggle">
@@ -53,14 +61,26 @@
                     <div v-for="l in subjects">
                         <div class="col" style="margin:0px;padding:0px">
                             <div class="card" style="width: 18rem;padding-top:15px;margin-top:15px;">
+                                <div
+                                    style="margin-top:0px;padding-top:0px;background-color: rgb(244, 244, 244);color:rgb(0, 0, 0)">
+                                    <strong>{{l.location}}</strong>
+                                </div>
                                 <div class="display-6">{{l.name}}</div>
                                 <img v-bind:src="l.img" class="rounded mx-auto d-block" v-bind:alt='l.img'
                                     style="height: 80px;width: 80px;">
                                 <div class="card-body">
+                                    <div style="border: 1px dotted;">AVAILABLE SLOTS <strong>{{l.slots}}</strong></div>
+                                    <br>
                                     <p>
                                         <mark class="display-6">{{l.cur}} {{l.price}}</mark>
                                         <br> was:<del>{{l.cur}} {{l.price+8}}</del>
                                     </p>
+                                    <div v-if="l.slots > 0">
+                                        <button type="button" class="btn btn-success btn-sm" v-on:click="cart.push(l);l.slots--">ADD</button>
+                                    </div>
+                                    <div v-else>
+                                        <button type="button" class="btn btn-success disabled btn-sm">ADD</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +91,7 @@
 
         <!-- Toggle True: Cart View -->
         <div v-else>
-            <h2>else</h2>
+            {{cart}}
         </div>
     </div>
 </body>
