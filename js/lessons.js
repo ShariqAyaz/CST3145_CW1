@@ -1,4 +1,4 @@
-let lessons = [
+let lessonsObj = [
   {
     id: 28,
     name: 'Basketball',
