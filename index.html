@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="js/lessons.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/lessons.js"></script>
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
@@ -43,29 +43,36 @@
 
     <!-- Started VUE Application here -->
     <div id="VueApp">
+
         <!-- Toggle True: Catalogue View -->
         <div v-if="toggle">
             <div class="container text-center">
-                <div class="display-6">Catalogue</div><hr>
+                <div class="display-6">Catalogue</div>
+                <hr>
                 <div class="row row-cols-3">
                     <div v-for="l in subjects">
-                    <div class="col">
-                        <div class="card" style="width: 18rem;padding:5px;margin:5px">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-text">{{l.price}}</p>
+                        <div class="col" style="margin:0px;padding:0px">
+                            <div class="card" style="width: 18rem;padding-top:15px;margin-top:15px;">
+                                <div class="display-6">{{l.name}}</div>
+                                <img v-bind:src="l.img" class="rounded mx-auto d-block" v-bind:alt='l.img'
+                                    style="height: 80px;width: 80px;">
+                                <div class="card-body">
+                                    <p>
+                                        <mark class="display-6">{{l.cur}} {{l.price}}</mark>
+                                        <br> was:<del>{{l.cur}} {{l.price+8}}</del>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Toggle True: Cart View -->
         <div v-else>
             <h2>else</h2>
         </div>
-    </div>
     </div>
 </body>
 
