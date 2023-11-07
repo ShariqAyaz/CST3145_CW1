@@ -1,6 +1,6 @@
 let lessonsObj = [
   {
-    id: 28,
+    id: 16,
     name: 'Basketball',
     img: 'img/Basketball.jpg',
     price: 106,
@@ -47,7 +47,7 @@ let lessonsObj = [
   {
     id: 5,
     name: 'Art and Craft',
-    img: 'img/Art_and Craft.jpg',
+    img: 'img/Art_and_Craft.jpg',
     price: 108.1,
     slots: 20,
     location: 'London',
@@ -140,114 +140,6 @@ let lessonsObj = [
     img: 'img/Photography.jpg',
     price: 106.1,
     slots: 19,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 16,
-    name: 'Martial Arts',
-    img: 'img/Martial_Arts.jpg',
-    price: 106.3,
-    slots: 10,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 17,
-    name: 'Archery',
-    img: 'img/Archery.jpg',
-    price: 105.5,
-    slots: 10,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 18,
-    name: 'Horseback Riding',
-    img: 'img/Horseback_Riding.jpg',
-    price: 109.4,
-    slots: 24,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 19,
-    name: 'Fencing',
-    img: 'img/Fencing.jpg',
-    price: 107.7,
-    slots: 18,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 20,
-    name: 'Astronomy Club',
-    img: 'img/Astronomy_Club.jpg',
-    price: 100.1,
-    slots: 23,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 21,
-    name: 'Environmental Club',
-    img: 'img/Environmental_Club.jpg',
-    price: 100.3,
-    slots: 25,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 22,
-    name: 'Language Learning',
-    img: 'img/Language_Learning.jpg',
-    price: 107.4,
-    slots: 3,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 23,
-    name: 'Pottery and Ceramics',
-    img: 'img/Pottery_and Ceramics.jpg',
-    price: 100.6,
-    slots: 13,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 24,
-    name: 'Fitness and Exercise',
-    img: 'img/Fitness_and Exercise.jpg',
-    price: 101.5,
-    slots: 3,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 25,
-    name: 'Nature Exploration',
-    img: 'img/Nature_Exploration.jpg',
-    price: 100.9,
-    slots: 4,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 26,
-    name: 'Model Building',
-    img: 'img/Model_Building.jpg',
-    price: 102.7,
-    slots: 3,
-    location: 'London',
-    cur: '£'
-  },
-  {
-    id: 27,
-    name: 'Math Club',
-    img: 'img/Math_Club.jpg',
-    price: 109.2,
-    slots: 4,
     location: 'London',
     cur: '£'
   }
