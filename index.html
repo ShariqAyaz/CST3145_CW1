@@ -110,10 +110,11 @@
                                 <img v-bind:src="l.img" class="rounded mx-auto d-block" v-bind:alt='l.img'
                                     style="height: 70px;width: 70px;">
                                 <div class="card-body" style="margin: 0px;padding:0px; padding-bottom: 4px;">
-                                    <div style="border: 1px dotted;">QTY <strong>1</strong></div>
+                                    <div style="border: 1px dotted;">QTY <strong>{{l.quantity}}</strong></div>
                                     <br>
                                     <p>
-                                        <mark>{{l.cur}} {{l.price}}</mark>
+                                        <leed>Rate {{l.cur}}{{l.price}}</leed><br>
+                                        <mark>Price {{l.cur}}{{l.price*l.quantity}}</mark>
                                     </p>
                                     <button type="button" class="btn btn-danger btn-sm"
                                         v-on:click="cart.splice(idx,1);l.slots++">Remove</button>
@@ -171,13 +172,59 @@
         methods: {
             addCart(obj) {
                 // See whats comming
-                console.log(obj);
+                //console.log(obj);
 
-                if (this.cart.length > 0)
-                {
-                    
+                // Inserting First Item in Cart
+                if (this.cart.length <= 0) {
+                    // Insert Quantity Key in object
+                    const new_obj = {
+                        ...obj, quantity: 1
+                    }
+
+                    //Delete Slots key
+                    delete new_obj.slots;
+
+                    //That what meant be be hold in cart
+                    // {
+                    //     "id": 8,
+                    //     "name": "Music",
+                    //     "img": "img/Music.jpg",
+                    //     "price": 103.9,
+                    //     "location": "London",
+                    //     "cur": "£",
+                    //     "quantity": 1
+                    // }
+
+                    // Pushing first item in cart
+                    this.cart.push(new_obj);
+
+                    // Insert further Items in Cart
+                } else {
+
+                    // Locate whether the selected course is already in Cart or not
+                    let found = false;
+                    // if found just quantity++
+                    for (const ob of this.cart) {
+                        if (ob.id === obj.id) {
+                            console.log("YES");
+                            ob.quantity++;
+                            found = !found
+                            break;
+                        }
+                    }
+
+                    // found===false means new object meant to added
+                    if (found === false) {
+                        const new_obj = {
+                            ...obj, quantity: 1
+                        }
+                        //Delete Slots key
+                        delete new_obj.slots;
+                        this.cart.push(new_obj);
+                    }
+
                 }
-                
+
             }
         },
         computed: {
