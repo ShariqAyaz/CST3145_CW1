@@ -33,7 +33,7 @@
                         </li>
                         <div v-if="cart.length > 0">
                             <li class="nav-item">
-                                <a class="nav-link" v-on:click="toggle = !toggle" href="#">Cart</a>
+                                <a class="nav-link active" v-on:click="toggle = !toggle" href="#">Cart</a>
                             </li>
                         </div>
                         <div v-else>
@@ -67,16 +67,22 @@
                                 <div class="display-6">{{l.name}}</div>
                                 <img v-bind:src="l.img" class="rounded mx-auto d-block" v-bind:alt='l.img'
                                     style="height: 80px;width: 80px;">
-                                <div class="card-body">
-                                    <div style="border: 1px dotted;">AVAILABLE SLOTS <strong>{{l.slots}}</strong></div>
+                                <div class="card-body" style="margin: 0px;padding:0px; padding-bottom: 4px;">
+                                    <div style="margin: 0px;padding:0px;border: 1px dotted;">AVAILABLE SLOTS
+                                        <strong>{{l.slots}}</strong>
+                                    </div>
                                     <br>
-                                    <p>
-                                        <mark class="display-6">{{l.cur}} {{l.price}}</mark>
+                                    <p style="margin: 0px;padding:0px;">
+                                        <mark style="margin: 0px;padding:0px;" class="display-6">{{l.cur}}
+                                            {{l.price}}</mark>
                                         <br> was:<del>{{l.cur}} {{l.price+8}}</del>
                                     </p>
                                     <div v-if="l.slots > 0">
+                                        <!-- OLD -->
+                                        <!-- <button type="button" class="btn btn-success btn-sm"
+                                            v-on:click="cart.push(l);l.slots--">ADD</button> -->
                                         <button type="button" class="btn btn-success btn-sm"
-                                            v-on:click="cart.push(l);l.slots--">ADD</button>
+                                            v-on:click="addCart(l);">ADD</button>
                                     </div>
                                     <div v-else>
                                         <button type="button" class="btn btn-success disabled btn-sm">ADD</button>
@@ -103,7 +109,7 @@
                                 <div class="display-6">{{l.name}}</div>
                                 <img v-bind:src="l.img" class="rounded mx-auto d-block" v-bind:alt='l.img'
                                     style="height: 70px;width: 70px;">
-                                <div class="card-body">
+                                <div class="card-body" style="margin: 0px;padding:0px; padding-bottom: 4px;">
                                     <div style="border: 1px dotted;">QTY <strong>1</strong></div>
                                     <br>
                                     <p>
@@ -127,8 +133,9 @@
     <hr>
     <footer>
         <p style="text-align: center; font-style: italic; font-size: 14px;">
-            This site and content on this site is for non-commercial purpose and temporary. Any content which is
-            unauthorized could be reported to gr8shariq@gmail.com for removal.
+            This site and content on this site is for non-commercial purpose and temporary. Any content which anyone
+            found
+            unauthorized could be reported to gr8shariq@gmail.com for immidiate removal.
         </p>
     </footer>
 
@@ -162,7 +169,16 @@
             search_string: "",
         },
         methods: {
+            addCart(obj) {
+                // See whats comming
+                console.log(obj);
 
+                if (this.cart.length > 0)
+                {
+                    
+                }
+                
+            }
         },
         computed: {
 
