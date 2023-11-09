@@ -75,7 +75,7 @@ let lessonsObj = [
     id: 8,
     name: 'Music',
     img: 'img/Music.jpg',
-    price: 103.9,
+    price: 203.9,
     slots: 11,
     location: 'London',
     cur: '£'
@@ -84,7 +84,7 @@ let lessonsObj = [
     id: 9,
     name: 'Dance',
     img: 'img/Dance.jpg',
-    price: 109.8,
+    price: 159.8,
     slots: 12,
     location: 'Clapham',
     cur: '£'

@@ -43,8 +43,8 @@
                         </div>
                     </ul>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" v-model="search_string" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <input class="form-control me-2" v-model="search_string" @input="sortData" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success">Search</button>
                     </form>
                 </div>
             </div>
@@ -142,8 +142,8 @@
                                         <div style="border: 1px dotted;">QTY <strong>{{l.quantity}}</strong></div>
                                         <br>
                                         <p>
-                                        <div class="leed">Rate {{l.cur}}{{l.price}}</div>
-                                        <mark>Price {{l.cur}}{{l.price*l.quantity}}</mark>
+                                        <div class="leed">Rate {{l.cur}}{{l.price.toFixed(2)}}</div>
+                                        <mark>Price {{l.cur}}{{l.price*l.quantity.toFixed(2)}}</mark>
                                         </p>
                                         <button type="button" class="btn btn-danger btn-sm"
                                             v-on:click="removeCart(l,idx);">Remove</button>
@@ -208,6 +208,7 @@
         el: "#VueApp",
         data: {
             subjects: lessonsObj,
+            org_data: lessonsObj,
             // cart[]: volatile , holding only cart item unless refresh or progress to proceed purchased
             cart: [],
             // toggle: toggle between cart and catalogue
@@ -384,15 +385,23 @@
                 }
             },
             setSortCriteria(criteria) {
-                alert(criteria);
                 this.sortParam = criteria;
                 this.sortData();
               },
               sortData(){
+                if (this.search_string.length > 0){
+                    this.subjects = this.subjects.filter(item => {
+                        return item.name.toLowerCase().includes(this.search_string.toLowerCase());
+                      });
+                }else{
+                    this.subjects = this.org_data.slice();
+                }
+
                 this.subjects.sort((a,b) => {
                     const ord = this.sort === true ? 1 : -1;
                     return a[this.sortParam] > b[this.sortParam] ? ord : -ord;
                 });
+
               },
         },
         computed: {
