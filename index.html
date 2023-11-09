@@ -130,13 +130,14 @@
                         <div class="display-5">Personal Details</div>
                         <div class="form-group">
                             <label for="Name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Name">
+                            <input v-model="name" type="text" class="form-control" id="name" placeholder="Name">
                         </div>
                         <div style="padding: 5px;margin:5px;" class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="text" class="form-control" id="phone" placeholder="Phone">
+                            <input v-model="phone" type="text" class="form-control" id="phone" placeholder="Phone">
                         </div>
-                        <button type="button" class="btn btn-success">Proceed Checkout</button>
+                        <button type="button" v-on:click="proceedOrder();" class="btn btn-success">Proceed
+                            Checkout</button>
                     </div>
                 </div>
                 <!-- Cart Form Ended -->
@@ -178,9 +179,9 @@
             phone: "",
             cartSum: [],
             // order[]: Order Number carrying ordered only, data moved from cart
-            order: [
+            orders: [
                 {
-                    order_no: "",
+                    order_no: 0,
                     name: "",
                     phone: "",
                     subject: {
@@ -249,7 +250,7 @@
 
             },
             removeCart(l, idx) {
-                
+
                 // if that item in cart is only one quantity, require to splice from cart
                 // adding further value into subjects on selected id
                 if (this.cart[idx].quantity === 1) {
@@ -260,8 +261,8 @@
 
                     this.cart.splice(idx, 1);
 
-                // if selected item are more than one quantity require minus one quantity each time
-                // adding further value into subjects on selected id
+                    // if selected item are more than one quantity require minus one quantity each time
+                    // adding further value into subjects on selected id
                 } else {
 
                     cid = this.subjects.find(i => i.id === l.id);
@@ -286,6 +287,32 @@
                 if (this.cart.length <= 0) this.toggle = !this.toggle;
 
                 return { sum: sum, qty: qty };
+            },
+            proceedOrder() {
+
+                this.cart.forEach(cartItem => {
+                    let orderEntry = {
+                        order_no: this.order_no + 1,
+                        name: this.name,
+                        phone: this.phone,
+                        subject: {
+                            course_id: cartItem.id,
+                            price: cartItem.price,
+                            quantity: cartItem.quantity
+                        }
+                    };
+
+                    // Push the order entry into the order array
+                    this.orders.push(orderEntry);
+                });
+
+
+
+                alert("Order completed")
+                this.cart = [];
+                this.name = "";
+                this.phone = "";
+                this.resetCartTotal();
             },
             resetCartTotal() {
                 if (this.cartSum.length > 0) {
