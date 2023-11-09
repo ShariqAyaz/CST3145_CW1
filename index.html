@@ -248,9 +248,30 @@
                 this.resetCartTotal()
 
             },
-            removeCart(l,idx) {
-                console.log(l);
-                this.cart.splice(idx,1);
+            removeCart(l, idx) {
+                
+                // if that item in cart is only one quantity, require to splice from cart
+                // adding further value into subjects on selected id
+                if (this.cart[idx].quantity === 1) {
+
+                    cid = this.subjects.find(i => i.id === l.id);
+
+                    cid.slots++;
+
+                    this.cart.splice(idx, 1);
+
+                // if selected item are more than one quantity require minus one quantity each time
+                // adding further value into subjects on selected id
+                } else {
+
+                    cid = this.subjects.find(i => i.id === l.id);
+
+                    cid.slots++;
+
+                    this.cart[idx].quantity--;
+
+                }
+
                 this.resetCartTotal();
             },
             // Obtaining sum of total, and total quantity
@@ -262,11 +283,11 @@
                     sum += (element.price * element.quantity)
                     qty += (element.quantity)
                 });
-                if(this.cart.length <=0)this.toggle=!this.toggle;
-                
+                if (this.cart.length <= 0) this.toggle = !this.toggle;
+
                 return { sum: sum, qty: qty };
             },
-            resetCartTotal(){
+            resetCartTotal() {
                 if (this.cartSum.length > 0) {
                     this.cartSum.splice(0);
                     this.cartSum.push(this.cartTotal());
