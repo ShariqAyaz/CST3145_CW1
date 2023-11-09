@@ -43,7 +43,7 @@
                         </div>
                     </ul>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control me-2" v-model="search_string" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -53,11 +53,41 @@
         <!-- Toggle True: Catalogue View -->
         <div v-if="toggle">
             <div class="container text-center">
-                <div class="display-6">Catalogue</div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="display-6 clearfix"> </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="padding-top: 30px;" class="display-6 clearfix">Catalogue</div>
+                    </div>
+                    <div class="col-md-4">
+                        <!-- SORTING  -->
+                        <div style="margin: 5px; padding: 5px" class=" btn-info">
+                            <label class="text-left" for="sortSelect">Sort by:</label>
+                            <select id="sortSelect" class="form-control" v-model="sortParam" @change="sortData">
+                                <option class="dropdown-item" disabled value="">Sort By</option>
+                                <option class="dropdown-item" value="name">Name</option>
+                                <option class="dropdown-item" value="location">Location</option>
+                                <option class="dropdown-item" value="price">Price</option>
+                                <option class="dropdown-item" value="slots">Slots</option>
+                            </select>
+                        </div>
+                        <div class="btn-group-vertical form-control" role="group"
+                            aria-label="Vertical radio toggle button group clearfix">
+                            <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" v-model="sort"
+                                :value="true" @change="sortData" autocomplete="off">
+                            <label class="btn btn-outline-info" for="vbtn-radio1">Ascending</label>
+                            <input type="radio" class="btn-check" name="vbtn-radio" v-model="sort" :value="false" @change="sortData"
+                                id="vbtn-radio2" autocomplete="off">
+                            <label class="btn btn-outline-info" for="vbtn-radio2">Descending</label>
+                        </div>
+                    </div>
+                    <!-- SORTING  -->
+                </div>
                 <hr>
                 <div class="row row-cols-3">
                     <!-- Catalogue View -->
-                    <div v-for="l in subjects">
+                    <div v-for="l in subjects" >
                         <div class="col" style="margin:0px;padding:0px">
                             <div class="card" style="width: 18rem;padding-top:15px;margin-top:15px;">
                                 <div
@@ -130,14 +160,22 @@
                         <div class="display-5">Personal Details</div>
                         <div class="form-group">
                             <label for="Name">Name</label>
-                            <input v-model="name" type="text" class="form-control" id="name" placeholder="Name">
+                            <input v-model="name" type="text" class="form-control" id="name" placeholder="Name"
+                                @input="validateName">
                         </div>
                         <div style="padding: 5px;margin:5px;" class="form-group">
                             <label for="phone">Phone</label>
-                            <input v-model="phone" type="text" class="form-control" id="phone" placeholder="Phone">
+                            <input v-model="phone" type="text" class="form-control" id="phone" placeholder="Phone"
+                                @input="validatePh">
                         </div>
-                        <button type="button" v-on:click="proceedOrder();" class="btn btn-success">Proceed
-                            Checkout</button>
+                        <div v-if="Chkbtn">
+                            <button type="button" v-on:click="proceedOrder();" class="btn btn-success">Proceed
+                                Checkout</button>
+                        </div>
+                        <div v-else>
+                            <button type="button" class="btn btn-success disabled">Proceed
+                                Checkout</button>
+                        </div>
                     </div>
                 </div>
                 <!-- Cart Form Ended -->
@@ -174,7 +212,8 @@
             cart: [],
             // toggle: toggle between cart and catalogue
             toggle: true,
-            sort: 1, // Assending order 1, deassending order 2
+            sort: true,
+            sortParam: "name",
             name: "",
             phone: "",
             cartSum: [],
@@ -191,6 +230,8 @@
                     }
                 }
             ],
+            btnProceed: false,
+            Chkbtn: false,
             search_string: "",
         },
         methods: {
@@ -247,6 +288,7 @@
                 }
 
                 this.resetCartTotal()
+                this.checkoutBtn();
 
             },
             removeCart(l, idx) {
@@ -277,6 +319,7 @@
             },
             // Obtaining sum of total, and total quantity
             cartTotal() {
+
                 var sum = 0;
                 var qty = 0;
 
@@ -285,6 +328,8 @@
                     qty += (element.quantity)
                 });
                 if (this.cart.length <= 0) this.toggle = !this.toggle;
+
+                this.checkoutBtn();
 
                 return { sum: sum, qty: qty };
             },
@@ -306,13 +351,20 @@
                     this.orders.push(orderEntry);
                 });
 
-
-
                 alert("Order completed")
                 this.cart = [];
                 this.name = "";
                 this.phone = "";
                 this.resetCartTotal();
+
+            },
+            validateName() {
+                this.name = this.name.replace(/[^a-zA-Z]/g, "");
+                this.checkoutBtn();
+            },
+            validatePh() {
+                this.phone = this.phone.replace(/\D/g, "");
+                this.checkoutBtn();
             },
             resetCartTotal() {
                 if (this.cartSum.length > 0) {
@@ -322,7 +374,26 @@
                 else {
                     this.cartSum.push(this.cartTotal());
                 }
-            }
+            },
+            // Checkout button enabled/disabled
+            checkoutBtn() {
+                if (this.name !== "" & this.phone !== "") {
+                    this.Chkbtn = true;
+                } else {
+                    this.Chkbtn = false;
+                }
+            },
+            setSortCriteria(criteria) {
+                alert(criteria);
+                this.sortParam = criteria;
+                this.sortData();
+              },
+              sortData(){
+                this.subjects.sort((a,b) => {
+                    const ord = this.sort === true ? 1 : -1;
+                    return a[this.sortParam] > b[this.sortParam] ? ord : -ord;
+                });
+              },
         },
         computed: {
 

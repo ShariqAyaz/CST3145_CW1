@@ -5,7 +5,7 @@ let lessonsObj = [
     img: 'img/Basketball.jpg',
     price: 106,
     slots: 0,
-    location: 'London',
+    location: 'Croydon',
     cur: '£'
   },
   {
@@ -14,7 +14,7 @@ let lessonsObj = [
     img: 'img/Soccer.jpg',
     price: 107.8,
     slots: 4,
-    location: 'London',
+    location: 'Blackfriars',
     cur: '£'
   },
   {
@@ -23,7 +23,7 @@ let lessonsObj = [
     img: 'img/Tennis.jpg',
     price: 102.7,
     slots: 7,
-    location: 'London',
+    location: 'Blackfriars',
     cur: '£'
   },
   {
@@ -41,7 +41,7 @@ let lessonsObj = [
     img: 'img/Robotics.jpg',
     price: 102.1,
     slots: 21,
-    location: 'London',
+    location: 'Acton',
     cur: '£'
   },
   {
@@ -59,7 +59,7 @@ let lessonsObj = [
     img: 'img/Coding.jpg',
     price: 105.6,
     slots: 16,
-    location: 'London',
+    location: 'Battersea',
     cur: '£'
   },
   {
@@ -68,7 +68,7 @@ let lessonsObj = [
     img: 'img/Drama_and_Theater.jpg',
     price: 104,
     slots: 5,
-    location: 'London',
+    location: 'Clapham',
     cur: '£'
   },
   {
@@ -86,7 +86,7 @@ let lessonsObj = [
     img: 'img/Dance.jpg',
     price: 109.8,
     slots: 12,
-    location: 'London',
+    location: 'Clapham',
     cur: '£'
   },
   {
@@ -95,7 +95,7 @@ let lessonsObj = [
     img: 'img/Yoga.jpg',
     price: 105.2,
     slots: 5,
-    location: 'London',
+    location: 'Westminster',
     cur: '£'
   },
   {
@@ -104,7 +104,7 @@ let lessonsObj = [
     img: 'img/Cooking.jpg',
     price: 107.5,
     slots: 5,
-    location: 'London',
+    location: 'Camberwell',
     cur: '£'
   },
   {
@@ -122,7 +122,7 @@ let lessonsObj = [
     img: 'img/Gardening.jpg',
     price: 105.7,
     slots: 15,
-    location: 'London',
+    location: 'Camberwell',
     cur: '£'
   },
   {
@@ -140,7 +140,7 @@ let lessonsObj = [
     img: 'img/Photography.jpg',
     price: 106.1,
     slots: 19,
-    location: 'London',
+    location: 'Cricklewood',
     cur: '£'
   }
 ]
