@@ -2,7 +2,7 @@ let lessonsObj = [
   {
     id: 16,
     name: 'Basketball',
-    img: 'img/Basketball.jpg',
+    img: 'img/Basketbal.jpg',
     price: 106,
     slots: 0,
     location: 'Croydon',
