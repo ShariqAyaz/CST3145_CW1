@@ -389,6 +389,7 @@
                 this.sortData();
               },
               sortData(){
+
                 if (this.search_string.length > 0){
                     this.subjects = this.subjects.filter(item => {
                         return item.name.toLowerCase().includes(this.search_string.toLowerCase());
